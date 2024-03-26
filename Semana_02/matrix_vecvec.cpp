@@ -5,7 +5,7 @@ int main(){
 
   std::vector< std::vector<int> > vec; // Se necesitan espacios entre los <>
   
-  for(int i = 0; i < 0; ++i){
+  for(int i = 0; i < 10; ++i){
     std::vector<int> row; // Crea una fila vacía
     for(int j = 0; j < 20; ++j){
       row.push_back(i * j); // Añade un elemento a la fila 
