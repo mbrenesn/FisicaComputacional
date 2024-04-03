@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 // Porqué pongo la firma de esta función al inicio?
 void print_mat(std::vector<double> &mat, int &rows, int &cols);
