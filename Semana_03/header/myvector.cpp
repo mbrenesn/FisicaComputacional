@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 // Debemos incluir el archivo de declaración
 #include "myvector.hpp"
