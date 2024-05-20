@@ -62,5 +62,7 @@ int main(int argc, char* argv[]){
     std::cout << pi_approx << std::endl;
   }
 
+  MPI_Finalize();
+
   return 0;
 }
