@@ -1,19 +1,21 @@
 #include <iostream>
 #include <vector>
-#include <omp.h>
-#include <sys/time.h>
 
-double seconds()
-{
-  struct timeval tmp;
-  double sec;
-  gettimeofday( &tmp, (struct timezone *)0 );
-  sec = tmp.tv_sec + ((double)tmp.tv_usec)/1000000.0;
-  
-  return sec;
-}
+// Porqué pongo la firma de esta función al inicio?
+void print_mat(std::vector<double> &mat, int &rows, int &cols);
 
 int main(int argc, char* argv[]){
+
+  std::cout << "Multiplicación de matrices!" << std::endl;
+  std::cout << "La idea es calcular C = A * B" << std::endl;
+  std::cout << "A y B son matrices con valores predefinidos." << std::endl;
+  std::cout << "Para esta evaluación requerimos poner en práctica" << std::endl;
+  std::cout << "el concepto de memoria contigua." << std::endl;
+  std::cout << "En general, este algoritmo depende mucho de la estructura de datos" << std::endl;
+  std::cout << "usada para representar las matrices." << std::endl;
+  std::cout << "Fun fact: los algoritmos para mejorar la eficiencia de multiplicación" << std::endl;
+  std::cout << "de matrices es un campo de investigación aún abierto, dado que" << std::endl;
+  std::cout << "existe una infinidad de algoritmos que dependen de esta operación" << std::endl;
 
   // Definamos la dimensión de las matrices mediante argumentos de la terminal
   if(argc != 7){
@@ -44,29 +46,33 @@ int main(int argc, char* argv[]){
     }
   }
 
+  std::cout << "Matrix A = " << std::endl;
+  print_mat(A, l, n);
+  std::cout << "Matrix B = " << std::endl;
+  print_mat(B, n, m);
+
   std::cout << "Calculando multiplicación..." << std::endl;
   // C ya se encuentra inicializada en 0!
   // Eso significa que podemos hacer la suma parcial en cada uno de sus elementos
-  double time_1 = seconds();
-  int num_threads;
-  #pragma omp parallel shared(A,B,C,l,m,n)
-  {
-    num_threads = omp_get_num_threads();
-    #pragma omp for
-    for(int i = 0; i < l; ++i){
-      for(int j = 0; j < m; ++j){
-        double sum = 0.0;
-        for(int k = 0; k < n; ++k){
-          sum += A[(i * n) + k] * B[(k * m) + j];
-        }
-        C[(i * m) + j] = sum;
+  for(int i = 0; i < l; ++i){
+    for(int j = 0; j < m; ++j){
+      for(int k = 0; k < n; ++k){
+        C[(i * m) + j] += A[(i * n) + k] * B[(k * m) + j];
       }
     }
   }
-  double time_2 = seconds();
-
-  std::cout << "# Num Threads: " << num_threads << std::endl;
-  std::cout << "# Time: " << time_2 - time_1 << std::endl;
+  std::cout << "Resultado C = " << std::endl;
+  print_mat(C, l, m);
 
   return 0;
+}
+
+// Porqué la firma de esta función usa & para sus argumentos?
+void print_mat(std::vector<double> &mat, int &rows, int &cols){
+  for(int i = 0; i < rows; ++i){
+    for(int j = 0; j < cols; ++j){
+      std::cout << mat[(i * cols) + j] << " ";
+    }
+    std::cout << std::endl;
+  }
 }
