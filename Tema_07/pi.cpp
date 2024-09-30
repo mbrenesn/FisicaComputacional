@@ -26,7 +26,7 @@ int main(int argc, char* argv[]){
   double sum = 0.0; // Valor de la suma
   double w = 1.0 / n; // Número de particiones
   for(int i = 0; i < n; ++i){
-    double x = w * (i - 0.5); // Variable independiente
+    double x = w * (i + 0.5); // Variable independiente
     sum += 4.0 / (1.0 + (x * x)); // Evaluamos la función en el valor de x
   }
   // sum es una variable que contiene la altura de los rectangulos
