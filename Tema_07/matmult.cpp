@@ -54,10 +54,11 @@ int main(int argc, char* argv[]){
   std::cout << "Calculando multiplicación..." << std::endl;
   // C ya se encuentra inicializada en 0!
   // Eso significa que podemos hacer la suma parcial en cada uno de sus elementos
+  // LABORATORIO: COMPLETAR la multiplicación de las matrices
   for(int i = 0; i < l; ++i){
     for(int j = 0; j < m; ++j){
       for(int k = 0; k < n; ++k){
-        C[(i * m) + j] += A[(i * n) + k] * B[(k * m) + j];
+        // Su código aquí
       }
     }
   }
