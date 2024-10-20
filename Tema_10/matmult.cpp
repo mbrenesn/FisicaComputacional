@@ -47,25 +47,20 @@ int main(int argc, char* argv[]){
   std::cout << "Calculando multiplicación..." << std::endl;
   // C ya se encuentra inicializada en 0!
   // Eso significa que podemos hacer la suma parcial en cada uno de sus elementos
+  // Laboratorio: paralelizar la multiplicación de las matrices subdividiendo las *filas* de C
   double time_1 = seconds();
-  int num_threads;
-  #pragma omp parallel shared(A,B,C,l,m,n)
-  {
-    num_threads = omp_get_num_threads();
-    #pragma omp for
-    for(int i = 0; i < l; ++i){
-      for(int j = 0; j < m; ++j){
-        double sum = 0.0;
-        for(int k = 0; k < n; ++k){
-          sum += A[(i * n) + k] * B[(k * m) + j];
-        }
-        C[(i * m) + j] = sum;
+  for(int i = 0; i < l; ++i){
+    for(int j = 0; j < m; ++j){
+      double sum = 0.0;
+      for(int k = 0; k < n; ++k){
+        C[(i * m) + j] += A[(i * n) + k] * B[(k * m) + j];
       }
     }
   }
   double time_2 = seconds();
 
-  std::cout << "# Num Threads: " << num_threads << std::endl;
+  // Laboratorio: Cuente el número de hilos usando la API e imprima el resultado al final del programa
+  //std::cout << "# Num Threads: " << num_threads << std::endl;
   std::cout << "# Time: " << time_2 - time_1 << std::endl;
 
   return 0;
