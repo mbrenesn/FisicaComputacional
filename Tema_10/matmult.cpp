@@ -51,7 +51,6 @@ int main(int argc, char* argv[]){
   double time_1 = seconds();
   for(int i = 0; i < l; ++i){
     for(int j = 0; j < m; ++j){
-      double sum = 0.0;
       for(int k = 0; k < n; ++k){
         C[(i * m) + j] += A[(i * n) + k] * B[(k * m) + j];
       }
