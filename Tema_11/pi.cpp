@@ -26,17 +26,26 @@ int main(int argc, char* argv[]){
   // Subdivisión del rango de trabajo
   // Las siguientes operaciones se encargan de balancear la carga
   // en caso de que "n" no sea un múltiplo de del número de procesos
-  int nlocal = n / size;
-  int rest = n % size;
+  // Su código aquí
+  //int nlocal = ?;
+  //int rest = ?;
 
-  if(rest && (rank < rest)) nlocal++;
+  // Ahora, si existe un resto y el rango es *menor* que el resto,
+  // le sumamos uno a nlocal:
+  // Su código aquí
 
-  int start = rank * nlocal;
-  if(rest && (rank >= rest)) start += rest;
+  // Definimos un punto de comienzo y le llamamos "start"
+  //int start = ?;
+  // Ahora, si existe un resto y el rango es *mayor o igual* que el resto,
+  // le sumamos el resto a start. Esto se debe a que los rangos menores son los
+  // los que recibieron un trozo mas grande
+  // Su código aquí
 
-  int end = start + nlocal; 
+  // Ahora definimos un punto final
+  //int end = ?; 
 
   // Cálculo de la integral
+  // La suma local es local a cada rango
   double local_sum = 0.0;
   double w = 1.0 / n;
   // Subdividimos el for loop en secciones más pequeñas que cada proceso realiza
@@ -49,10 +58,11 @@ int main(int argc, char* argv[]){
   // intermedios.
   // Vamos a usar el proceso de rango 0 para coleccionar los resultados intermedios
   double global_sum;
-  MPI_Reduce(&local_sum, &global_sum, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+  // Reducción aquí
+  //MPI_Reduce(...);
 
   double time_2 = MPI_Wtime();
-  // Ahora el rango 0 contiene la suma total
+  // Ahora el rango 0 contiene la suma total, los otros procesos no contienen este valor!
   if(rank == 0){
     double pi_approx = global_sum * w;
     std::cout.precision(10);
