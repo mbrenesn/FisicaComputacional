@@ -18,13 +18,13 @@ int main(){
 
   if(size != 2) MPI_Abort(MPI_COMM_WORLD, 1);
 
+  // Laboratorio
+  // Realice la operación Send-Recv utilizando un llamado a la función MPI_Sendrecv
   if(rank == 0){
-    MPI_Sendrecv(&sendbuff, 1, MPI_INT, 1, tag,
-                 &recvbuff, 1, MPI_INT, 1, tag, MPI_COMM_WORLD, &stat);
+    // Su código aquí
   }
   if(rank == 1){
-    MPI_Sendrecv(&sendbuff, 1, MPI_INT, 0, tag,
-                 &recvbuff, 1, MPI_INT, 0, tag, MPI_COMM_WORLD, &stat);
+    // Su código aquí
   }
 
   std::cout << "I'm: " << rank << " and my recv is: " << recvbuff << std::endl;

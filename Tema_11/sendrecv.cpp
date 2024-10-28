@@ -18,10 +18,12 @@ int main(){
 
   if(size != 2) MPI_Abort(MPI_COMM_WORLD, 1);
 
+  // Laboratorio
+  // Asegúrese de que entiende lo que hace la siguiente línea
   int peer = (rank == 0) ? 1 : 0;
 
-  MPI_Sendrecv(&sendbuff, 1, MPI_INT, peer, tag,
-               &recvbuff, 1, MPI_INT, peer, tag, MPI_COMM_WORLD, &stat);
+  // Implemente el Send-Recv
+  // Su código aquí
 
   std::cout << "I'm: " << rank << " and my recv is: " << recvbuff << std::endl;
 
