@@ -50,7 +50,7 @@ int main(int argc, char* argv[]){
   double w = 1.0 / n;
   // Subdividimos el for loop en secciones más pequeñas que cada proceso realiza
   for(int i = start; i < end; ++i){
-    double x = w * (i - 0.5);
+    double x = w * (i + 0.5);
     local_sum += 4.0 / (1.0 + (x * x));
   }
   // sum es una suma parcial de cada proceso!
